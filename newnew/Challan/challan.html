@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Challan System</title>
+    <link rel="stylesheet" href="css/challan.css">
+</head>
+<body>
+    <div class="container">
+        <h2>E-Challan System</h2>
+        <form id="challanForm">
+            <label for="registrationNumber">Enter Challan ID:</label>
+            <input type="text" id="registrationNumber" placeholder="Enter Challan ID" required>
+            <button type="button" onclick="viewChallan()">View</button>
+        </form>
+        <div id="output" class="output" style="display: none;"></div>
+    </div>
+
+    <script>
+        function viewChallan() {
+            const challanID = document.getElementById('registrationNumber').value;
+            const outputDiv = document.getElementById('output');
+
+            // Fake challan data
+            const challanDatabase = {
+                "123456": {
+                    name: "Amaan",
+                    vehicleRegistration: "ABC-1234",
+                    date: "2024-12-19",
+                    violation: "Over Speeding",
+                    fineAmount: "2000 PKR",
+                    status: "Unpaid"
+                },
+                "654321": {
+                    name: "Sara",
+                    vehicleRegistration: "XYZ-9876",
+                    date: "2025-01-05",
+                    violation: "Signal Violation",
+                    fineAmount: "1500 PKR",
+                    status: "Paid"
+                },
+                "112233": {
+                    name: "John",
+                    vehicleRegistration: "LMN-4567",
+                    date: "2024-11-28",
+                    violation: "No Parking",
+                    fineAmount: "500 PKR",
+                    status: "Unpaid"
+                },
+                "223344": {
+                    name: "Maya",
+                    vehicleRegistration: "PQR-8901",
+                    date: "2024-12-01",
+                    violation: "No Helmet",
+                    fineAmount: "1000 PKR",
+                    status: "Paid"
+                },
+                "334455": {
+                    name: "Ali",
+                    vehicleRegistration: "TUV-5678",
+                    date: "2024-12-22",
+                    violation: "Wrong Lane",
+                    fineAmount: "800 PKR",
+                    status: "Unpaid"
+                },
+                "445566": {
+                    name: "Zara",
+                    vehicleRegistration: "JKL-2345",
+                    date: "2024-12-25",
+                    violation: "Over Speeding",
+                    fineAmount: "2000 PKR",
+                    status: "Unpaid"
+                }
+            };
+
+            // Check if the entered Challan ID exists
+            if (challanDatabase[challanID]) {
+                const challanData = challanDatabase[challanID];
+                outputDiv.innerHTML = `
+                    <h3>Challan Details</h3>
+                    <p><strong>Challan ID:</strong> ${challanID}</p>
+                    <p><strong>Name:</strong> ${challanData.name}</p>
+                    <p><strong>Vehicle Registration Number:</strong> ${challanData.vehicleRegistration}</p>
+                    <p><strong>Date:</strong> ${challanData.date}</p>
+                    <p><strong>Violation:</strong> ${challanData.violation}</p>
+                    <p><strong>Fine Amount:</strong> ${challanData.fineAmount}</p>
+                    <p><strong>Status:</strong> ${challanData.status}</p>
+                `;
+            } else {
+                outputDiv.innerHTML = `
+                    <h3>No Record Found</h3>
+                    <p>The Challan ID <strong>${challanID}</strong> does not exist in our database.</p>
+                `;
+            }
+
+            outputDiv.style.display = 'block';
+        }
+    </script>
+</body>
+</html>
